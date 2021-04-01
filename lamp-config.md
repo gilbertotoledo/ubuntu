@@ -50,11 +50,14 @@ sudo ufw allow in "Apache Full"
 ```
 sudo apt-get -y install mysql-server
 sudo mysql_secure_installation
-
+```
+```
 sudo mysql -u root -p
 mysql> CREATE USER '[myroot]'@'localhost' IDENTIFIED BY '[password]';
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'myroot'@'localhost' WITH GRANT OPTION;
 mysql> exit
+```
+```
 systemctl status mysql.service
 ```
 
@@ -62,8 +65,12 @@ systemctl status mysql.service
 ```
 sudo apt-get -y install phpmyadmin
 sudo phpenmod mbstring
+```
+```
 sudo nano /etc/apache2/apache2.conf
 - Include /etc/phpmyadmin/apache.conf
+```
+```
 sudo systemctl restart apache2
 ```
 
@@ -71,19 +78,22 @@ sudo systemctl restart apache2
 ```
 sudo nano /etc/apache2/conf-available/phpmyadmin.conf
 AllowOverride All
-
+```
+```
 sudo systemctl restart apache2
-
+```
+```
 sudo nano /usr/share/phpmyadmin/.htaccess
 AuthType Basic
 AuthName "Restricted Files"
 AuthUserFile /etc/phpmyadmin/.htpasswd
 Require valid-user
-
+```
+```
 sudo htpasswd -c /etc/phpmyadmin/.htpasswd [username]
 ```
 
-Adicionar usuário
+8.1. Adicionar usuário
 ```
 sudo htpasswd /etc/phpmyadmin/.htpasswd [username] 
 ```
