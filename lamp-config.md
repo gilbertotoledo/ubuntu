@@ -93,7 +93,7 @@ Require valid-user
 sudo htpasswd -c /etc/phpmyadmin/.htpasswd [username]
 ```
 
-8.1. Adicionar usuário
+9. Adicionar usuário (opcional)
 ```
 sudo htpasswd /etc/phpmyadmin/.htpasswd [username] 
 ```
