@@ -12,9 +12,14 @@ while true; do
 	esac
 done
 
-apt-get -y update && apt-get -y upgrade
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install software-properties-common
+add-apt-repository -y ppa:ondrej/php
+apt-get -y update
 apt-get -y install curl vim 
-apt-get -y install apache2 apache2-utils php libapache2-mod-php php-mysql php-mbstring php-zip php-gd php-json php-curl
+apt-get -y install apache2 apache2-utils libapache2-mod-php8.0 libapache2-mod-fcgid
+apt-get -y install php8.0 php8.0-mysql php8.0-mbstring php8.0-zip php8.0-gd php8.0-json php8.0-curl php8.0-fpm
 apt-get -y install mysql-server
 
 FIND="index\.php "
@@ -25,8 +30,9 @@ FIND="DirectoryIndex"
 REPLACE="DirectoryIndex index\.php"
 sed -i "0,/$FIND/s/$FIND/$REPLACE/m" /etc/apache2/mods-available/dir.conf
 
-sudo a2enmod proxy_fcgi setenvif
-sudo a2enconf php7.0-fpm
+a2enmod proxy_fcgi setenvif
+a2enconf php8.0-fpm
+phpenmod mbstring
 
 systemctl restart apache2
 
@@ -55,7 +61,6 @@ mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTI
 mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON *.* TO '${pmausername}'@'localhost' WITH GRANT OPTION;"
 
 apt-get -y install phpmyadmin
-phpenmod mbstring
 
 sed -i '$a Include /etc/phpmyadmin/apache.conf' /etc/apache2/apache2.conf
 
