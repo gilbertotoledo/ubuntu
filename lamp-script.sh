@@ -19,7 +19,7 @@ add-apt-repository -y ppa:ondrej/php
 apt-get -y update
 apt-get -y install curl vim 
 apt-get -y install apache2 apache2-utils libapache2-mod-php8.0 libapache2-mod-fcgid
-apt-get -y install php8.0 php8.0-mysql php8.0-mbstring php8.0-zip php8.0-gd php8.0-json php8.0-curl php8.0-fpm
+apt-get -y install php8.0 php8.0-mysql php8.0-mbstring php8.0-zip php8.0-gd php8.0-curl php8.0-fpm
 apt-get -y install mysql-server
 
 FIND="index\.php "
