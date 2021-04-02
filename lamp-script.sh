@@ -42,13 +42,13 @@ echo -e "\n\nFirewall configuration finished!\n\n"
 
 mysql_secure_installation
 
-echo -e "\n\nPlease enter root password MySQL configured on previous steps: \n"
+echo -e "\n\nPlease enter root password MySQL configured on previous steps:"
 read -sp "Root MySql password: " rootpasswd
 
-echo -e "\n\nPlease enter username for PhpMyAdmin user root: \n"
+echo -e "\n\nPlease enter username for PhpMyAdmin user root:"
 read -p "Username: " pmausername
 
-echo -e "\n\nPlease enter password for PhpMyAdmin user root: \n"
+echo -e "\n\nPlease enter password for PhpMyAdmin user root:"
 read -sp "Password: " pmapassword
 
 mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword};"
