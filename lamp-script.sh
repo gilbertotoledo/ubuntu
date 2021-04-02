@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#Make lamp-script executable
+#sudo chmod +x file.sh
+
 while true; do
 	read -p "Do you want to install Apache + PHP + Mysql? [Y/N]" cnt1
 	case $cnt1 in
@@ -29,18 +33,20 @@ ufw allow OpenSSH
 ufw allow http
 ufw allow https
 ufw allow in "Apache Full"
-ufw enable
+echo "y" | sudo ufw enable
+
+echo "\n\nFirewall configuration finished!\n\n"
 
 mysql_secure_installation
 
-echo "Please enter root user MySQL password configured on previous steps: "
-read -sp rootpasswd
+echo "Please enter root password MySQL configured on previous steps: \n"
+read -sp "Root MySql password: " rootpasswd
 
-echo "Please enter username for PhpMyAdmin user root: "
-read -p pmausername
+echo "Please enter username for PhpMyAdmin user root: \n"
+read -p "Username: " pmausername
 
-echo "Please enter password for PhpMyAdmin user root: "
-read -sp pmapassword
+echo "Please enter password for PhpMyAdmin user root: \n"
+read -sp "Password" pmapassword
 
 mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword};"
 mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON *.* TO '${pmausername}'@'localhost' WITH GRANT OPTION;"
