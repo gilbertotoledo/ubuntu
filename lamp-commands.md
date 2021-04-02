@@ -61,7 +61,7 @@ sudo mysql_secure_installation
 ```
 sudo mysql -u root -p
 mysql> CREATE USER '[myroot]'@'localhost' IDENTIFIED BY '[password]';
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'myroot'@'localhost' WITH GRANT OPTION;
+mysql> GRANT ALL PRIVILEGES ON *.* TO '[myroot]'@'localhost' WITH GRANT OPTION;
 mysql> exit
 ```
 ```
