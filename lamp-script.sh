@@ -39,13 +39,13 @@ echo "\n\nFirewall configuration finished!\n\n"
 
 mysql_secure_installation
 
-echo "Please enter root password MySQL configured on previous steps: \n"
+echo "\n\nPlease enter root password MySQL configured on previous steps: \n"
 read -sp "Root MySql password: " rootpasswd
 
-echo "Please enter username for PhpMyAdmin user root: \n"
+echo "\n\nPlease enter username for PhpMyAdmin user root: \n"
 read -p "Username: " pmausername
 
-echo "Please enter password for PhpMyAdmin user root: \n"
+echo "\n\nPlease enter password for PhpMyAdmin user root: \n"
 read -sp "Password" pmapassword
 
 mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword};"
@@ -58,4 +58,4 @@ sed -i '$a Include /etc/phpmyadmin/apache.conf' /etc/apache2/apache2.conf
 
 systemctl restart apache2
 
-echo "LAMP Install successfull!"
+echo "\n\nLAMP Install successfull!\n\n"
