@@ -1,3 +1,4 @@
+#!/bin/bash
 while true; do
 	read -p "Do you want to install Apache + PHP + Mysql? [Y/N]" cnt1
 	case $cnt1 in
