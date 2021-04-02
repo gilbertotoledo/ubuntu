@@ -25,6 +25,9 @@ FIND="DirectoryIndex"
 REPLACE="DirectoryIndex index\.php"
 sed -i "0,/$FIND/s/$FIND/$REPLACE/m" /etc/apache2/mods-available/dir.conf
 
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php7.0-fpm
+
 systemctl restart apache2
 
 ufw status
@@ -46,7 +49,7 @@ echo -e "\n\nPlease enter username for PhpMyAdmin user root: \n"
 read -p "Username: " pmausername
 
 echo -e "\n\nPlease enter password for PhpMyAdmin user root: \n"
-read -sp "Password" pmapassword
+read -sp "Password: " pmapassword
 
 mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword};"
 mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON *.* TO '${pmausername}'@'localhost' WITH GRANT OPTION;"
