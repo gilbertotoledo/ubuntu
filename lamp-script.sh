@@ -42,7 +42,7 @@ ufw allow OpenSSH
 ufw allow http
 ufw allow https
 ufw allow in "Apache Full"
-echo "y" | sudo ufw enable
+echo "y" | ufw enable
 
 echo -e "\n\nFirewall configuration finished!\n\n"
 
