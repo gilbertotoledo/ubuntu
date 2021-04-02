@@ -25,12 +25,21 @@ sudo ufw allow https
 sudo ufw enable
 ```
 
-4. Instalar Apache e PHP
+4. Instalar repositorio Ondrej/php para PHP8.0
 ```
-sudo apt-get -y install apache2 apache2-utils php libapache2-mod-php php-mysql php-mbstring php-zip php-gd php-json php-curl
+apt-get -y install software-properties-common
+add-apt-repository -y ppa:ondrej/php
+apt-get -y update
 ```
 
-5. Configurar Apache
+5. Instalar Apache e PHP8.0
+```
+apt-get -y install curl
+apt-get -y install apache2 apache2-utils libapache2-mod-php8.0 libapache2-mod-fcgid
+apt-get -y install php8.0 php8.0-mysql php8.0-mbstring php8.0-zip php8.0-gd php8.0-json php8.0-curl php8.0-fpm
+```
+
+6. Configurar Apache
 ```
 sudo nano /etc/apache2/apache2.conf
 ServerName 192.168.1.150
@@ -43,6 +52,7 @@ index.php index.html
 ```
 sudo a2enmod proxy_fcgi setenvif
 sudo a2enconf php7.0-fpm
+sudo phpenmod mbstring
 ```
 
 ```
@@ -52,8 +62,7 @@ sudo systemctl status apache2
 sudo ufw allow in "Apache Full"
 ```
 
-
-6. Configurar MySql
+7. Configurar MySql
 ```
 sudo apt-get -y install mysql-server
 sudo mysql_secure_installation
@@ -68,10 +77,9 @@ mysql> CTRL + D
 systemctl status mysql.service
 ```
 
-7. Instalar PhpMyAdmin
+8. Instalar PhpMyAdmin
 ```
 sudo apt-get -y install phpmyadmin
-sudo phpenmod mbstring
 ```
 ```
 sudo nano /etc/apache2/apache2.conf
@@ -81,7 +89,7 @@ sudo nano /etc/apache2/apache2.conf
 sudo systemctl restart apache2
 ```
 
-8. Configurar proteção para PhpMyAdmin (opcional/recomendado)
+9. Configurar proteção para PhpMyAdmin (opcional/recomendado)
 ```
 sudo nano /etc/apache2/conf-available/phpmyadmin.conf
 AllowOverride All
@@ -100,7 +108,7 @@ Require valid-user
 sudo htpasswd -c /etc/phpmyadmin/.htpasswd [username]
 ```
 
-9. Adicionar usuário (opcional)
+10. Adicionar usuário (opcional)
 ```
 sudo htpasswd /etc/phpmyadmin/.htpasswd [username] 
 ```
