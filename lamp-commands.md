@@ -37,14 +37,21 @@ ServerName 192.168.1.150
 ```
 ```
 sudo nano /etc/apache2/mods-enabled/dir.conf
-index.php < index.html
+index.php index.html
 ```
+
+```
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php7.0-fpm
+```
+
 ```
 sudo systemctl restart apache2
 sudo systemctl status apache2
 
 sudo ufw allow in "Apache Full"
 ```
+
 
 6. Configurar MySql
 ```
