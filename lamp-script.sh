@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#Make lamp-script executable
-#sudo chmod +x file.sh
+#Make lamp-script.sh executable
+#sudo chmod +x lamp-script.sh
 
 while true; do
 	read -p "Do you want to install Apache + PHP + Mysql? [Y/N]" cnt1
