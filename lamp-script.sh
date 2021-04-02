@@ -51,7 +51,7 @@ read -p "Username: " pmausername
 echo -e "\n\nPlease enter password for PhpMyAdmin user root:"
 read -sp "Password: " pmapassword
 
-mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword};"
+mysql -uroot -p${rootpasswd} -e "CREATE USER '${pmausername}'@'localhost' IDENTIFIED BY '${pmapassword}';"
 mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON *.* TO '${pmausername}'@'localhost' WITH GRANT OPTION;"
 
 apt-get -y install phpmyadmin
