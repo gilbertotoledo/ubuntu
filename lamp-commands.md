@@ -51,7 +51,7 @@ index.php index.html
 
 ```
 sudo a2enmod proxy_fcgi setenvif
-sudo a2enconf php7.0-fpm
+sudo a2enconf php8.0-fpm
 sudo phpenmod mbstring
 ```
 
