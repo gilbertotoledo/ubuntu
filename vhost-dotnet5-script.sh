@@ -69,7 +69,7 @@ echo -e "\nVirtualHost created!\n"
 
 sudo htpasswd -d /etc/vsftpd/ftpd.passwd ${username}
 
-sed -i "$a ${username}" /etc/vsftpd.userlist
+printf "%s\n" ${username} >> /etc/vsftpd.userlist
 
 echo -e "\nFTP user created!\n"
 
