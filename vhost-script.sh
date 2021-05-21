@@ -13,13 +13,13 @@ while true; do
 done
 
 echo -e "\n\nPlease enter username for host:"
-read -sp "Username: " username
+read -p "Username: " username
 
 echo -e "\n\nPlease enter domain for host:"
-read -sp "Domain (abc.com.br): " domain
+read -p "Domain (abc.com.br): " domain
 
 echo -e "\n\nPlease enter alias for host:"
-read -sp "Alias (www.abc.com.br): " alias
+read -p "Alias (www.abc.com.br): " alias
 
 adduser ${username}
 usermod -aG www-data ${username}
