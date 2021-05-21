@@ -71,4 +71,8 @@ echo -e "\nFTP user created!\n"
 sudo service apache2 restart
 sudo service vsftpd restart
 
-echo -e "\n\nFinished!\n\n"
+sudo certbot --apache -d ${domain}
+
+echo -e "\n\nHTTPS configured!\n\n"
+
+echo -e "\n\nYour v-host is served on ${domain}!\n\n"
