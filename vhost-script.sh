@@ -24,7 +24,7 @@ read -p "Alias (www.abc.com.br): " alias
 adduser ${username}
 usermod -aG www-data ${username}
 
-echo -e "\n\nUser created!\n\n"
+echo -e "\nUser created!\n\n"
 
 sudo mkdir /var/www/${username}
 sudo mkdir /var/www/${username}/public_html
@@ -32,9 +32,15 @@ sudo chown -R vsftpd:nogroup /var/www/${username}
 sudo chmod -w /var/www/${username}
 sudo chmod -R 775 /var/www/${username}/public_html
 
-echo -e "\n\nUser diretory created!\n\n"
-
 cat > /etc/apache2/sites-available/${domain}.conf << EOF1
+<?php
+	echo "${domain} it works!";
+?>
+EOF1
+
+echo -e "\nUser diretory created!\n"
+
+cat > /etc/apache2/sites-available/${domain}.conf << EOF2
 <VirtualHost *:80>
 	ServerName ${domain}
 	ServerAlias ${alias}
@@ -43,24 +49,24 @@ cat > /etc/apache2/sites-available/${domain}.conf << EOF1
 
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
-    
+
 	<Directory /var/www/${username}/public_html>
 		Options Indexes FollowSymLinks
 		AllowOverride All
 		Require all granted
 	</Directory>
 </VirtualHost>
-EOF1
+EOF2
 
 sudo a2ensite ${domain}.conf
 
-echo -e "\n\nVirtualHost created!\n\n"
+echo -e "\nVirtualHost created!\n"
 
 sudo htpasswd -d /etc/vsftpd/ftpd.passwd ${username}
 
-sed -i '$a ${username}' /etc/vsftpd.userlist
+sed -i "$a ${username}" /etc/vsftpd.userlist
 
-echo -e "\n\nFTP user created!\n\n"
+echo -e "\nFTP user created!\n"
 
 sudo service apache2 restart
 sudo service vsftpd restart
