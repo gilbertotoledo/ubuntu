@@ -24,6 +24,9 @@ read -p "Alias (www.abc.com.br): " alias
 echo -e "\n\nWhat port is the application running on?"
 read -p "Port: " port
 
+echo -e "\n\nWhat is the DLL startup file?"
+read -p "Startup DLL file: " startupDllFile
+
 adduser ${username}
 usermod -aG www-data ${username}
 
@@ -81,3 +84,31 @@ sudo certbot --apache -d ${domain}
 echo -e "\n\nHTTPS configured!\n\n"
 
 echo -e "\n\nYour v-host is served on ${domain}!\n\n"
+
+echo -e "\nCreating service ${domain}\n"
+
+cat > /etc/systemd/system/${domain}.service << EOF1
+[Unit]
+Description=WebApi for ${domain}
+
+[Service]
+WorkingDirectory=/var/www/${username}/publish
+ExecStart=/usr/bin/dotnet /var/www/${username}/publish/${startupDllFile}.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=dotnet-example
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+[Install]
+WantedBy=multi-user.target
+
+EOF1
+
+echo -e "\nService ${domain} created!\n"
+
+sudo systemctl enable ${domain}.service
+sudo systemctl start ${domain}.service
+
+echo -e "\nService ${domain} started!\n"
